@@ -1,0 +1,36 @@
+version: "3"
+services:
+    nginx:
+        build:
+            dockerfile: Dockerfile
+            context: ./nginx
+        restart: always
+    api:
+        build:
+            dockerfile: Dockerfile
+            context: ./api
+        env_file:
+            - ./api/.env
+        depends_on:
+            - postgres
+    client:
+        build:
+            dockerfile: Dockerfile
+            context: ./client
+    postgres:
+        image: postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=deger
+            - POSTGRES_DB=chatdb
+        volumes:
+            - ./api/postgres-data:/var/lib/postgresql/data
+        ports:
+            - 5431:5432
+
+volumes:
+    postgres-data:
+networks:
+    draw-rec-network:
+        driver: bridge
+

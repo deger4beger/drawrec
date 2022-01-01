@@ -1,0 +1,6 @@
+*/node_modules
+*/dist
+*/build
+*/.env
+client/.next
+api/postgres-data

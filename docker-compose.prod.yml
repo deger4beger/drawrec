@@ -1,0 +1,9 @@
+version: "3"
+services:
+    nginx:
+        ports:
+            - 80:80
+    api:
+        build:
+            args:
+                NODE_ENV: production

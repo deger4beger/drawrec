@@ -1,0 +1,19 @@
+version: "3"
+services:
+    nginx:
+        ports:
+            - 3030:80
+    api:
+        build:
+            args:
+                NODE_ENV: development
+        volumes:
+            - /app/node_modules
+            - ./api:/app
+    client:
+        build:
+            args:
+                NODE_ENV: development
+        volumes:
+            - /app/node_modules
+            - ./client:/app

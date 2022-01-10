@@ -5,6 +5,7 @@ services:
             dockerfile: Dockerfile
             context: ./nginx
         restart: always
+        container_name: nginx
     api:
         build:
             dockerfile: Dockerfile
@@ -13,10 +14,12 @@ services:
             - ./api/.env
         depends_on:
             - postgres
+        container_name: api
     client:
         build:
             dockerfile: Dockerfile
             context: ./client
+        container_name: client
     postgres:
         image: postgres
         environment:
@@ -27,6 +30,7 @@ services:
             - ./api/postgres-data:/var/lib/postgresql/data
         ports:
             - 5431:5432
+        container_name: db
 
 volumes:
     postgres-data:
